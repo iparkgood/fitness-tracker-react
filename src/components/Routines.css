@@ -1,0 +1,41 @@
+#all-routines {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.routine {
+  background-color: #ffc;
+  width: 240px;
+  min-height: 200px;
+  padding: 16px;
+  margin: 16px;
+  box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+  transition: transform 0.15s linear;
+}
+#all-routines .routine:nth-child(even) {
+  transform: rotate(4deg);
+  position: relative;
+  top: 5px;
+  background-color: lightcyan;
+}
+#all-routines .routine:nth-child(3n) {
+  transform: rotate(-3deg);
+  position: relative;
+  top: -5px;
+  background-color: rgb(245, 210, 245);
+}
+#all-routines .routine:nth-child(5n) {
+  transform: rotate(5deg);
+  position: relative;
+  top: -10px;
+}
+#all-routines .routine:hover {
+  box-shadow: 10px 10px 7px 2px rgba(145, 145, 145, 0.5);
+  transform: scale(1.25);
+  position: relative;
+  z-index: 5;
+}
+
+.routine h3,p {
+  margin-bottom: 6px;
+}
