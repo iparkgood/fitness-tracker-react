@@ -10,3 +10,19 @@ export async function getActivities() {
     throw error;
   }
 }
+
+export async function createActivity(name, description) {
+  try {
+    const response = await fetch(`${BASE}/api/activities`, {
+      method: "POST",
+      body: JSON.stringify({
+        name, description
+      }),
+    });
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}

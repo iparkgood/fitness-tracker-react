@@ -1,59 +1,76 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import Modal from "react-modal";
 
 import "./Header.css";
 
-Modal.setAppElement("#root");
+import { default as AuthModal } from "./AuthModal";
+import { clearUsernameToken } from "../api";
 
-const Header = () => {
+const Header = ({ currentUsername, setCurrentUsername }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  
+  const [authType, setAuthType] = useState("register");
+  const [message, setMessage] = useState(null);
+
+  const handleLogout = () => {
+    clearUsernameToken();
+    setCurrentUsername(null);
+    setMessage("");
+  };
+
   return (
     <header>
       <div id="menu">
         <NavLink to="/" id="home-tab">
           Home
         </NavLink>
-        <NavLink to="/routines" id="routines-tab">
+        <NavLink to="/api/routines" id="routines-tab">
           Routines
         </NavLink>
-        <NavLink to="/routines" id="myroutines-tab">
-          My Routines
-        </NavLink>
-        <NavLink to="/activities" id="activities-tab">
+        {currentUsername && (
+          <NavLink to="/api/users/:username/routines" id="myroutines-tab">
+            My Routines
+          </NavLink>
+        )}
+        <NavLink to="/api/activities" id="activities-tab">
           Activities
         </NavLink>
       </div>
       <div id="header-buttons">
-        <button onClick={() => setModalIsOpen(true)}>Sign up</button>/<button onClick={() => setModalIsOpen(true)}>Sign in</button>
-        <button>Log out</button>
-        <Modal isOpen={modalIsOpen} style={{
-          overlay: {
-            backdropFilter: "blur(6px)"
-          },
-          content: {
-            top:"50%",
-            left:"50%",
-            transform: "translate(-50%, -50%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "480px",
-            height: "300px"
-          }
-        }}>
-          <form>
-          <label htmlFor="username">Username</label>
-          <input type="text" id="username" name="username" required/>
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" name="password" required/>
-          </form>
-          <button>Sign up</button>
-          <button onClick={() => setModalIsOpen(false)}>Close</button>
-        </Modal>
+        {currentUsername ? (
+          <a href="#" onClick={handleLogout}>
+            Log out
+          </a>
+        ) : (
+          <>
+            <NavLink
+              to="/api/users/register"
+              onClick={() => {
+                setModalIsOpen(true);
+                setAuthType("register");
+              }}
+            >
+              Sign up
+            </NavLink>
+            <NavLink
+              to="/api/users/login"
+              onClick={() => {
+                setModalIsOpen(true);
+                setAuthType("login");
+              }}
+            >
+              Log in
+            </NavLink>
+          </>
+        )}
       </div>
+      <AuthModal
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
+        authType={authType}
+        setCurrentUsername={setCurrentUsername}
+        message={message}
+        setMessage={setMessage}
+      />
     </header>
   );
 };

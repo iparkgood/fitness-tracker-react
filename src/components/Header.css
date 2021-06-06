@@ -38,14 +38,3 @@ header {
   color: gray;
   font-weight: bold;
 }
-#header-buttons button {
-  background: none;
-  padding: 0 10px;
-  font-size: 24px;
-  font-weight: bold;
-  color: gray;
-  cursor: pointer;
-}
-#header-buttons button:hover {
-  color: lightcoral;
-}

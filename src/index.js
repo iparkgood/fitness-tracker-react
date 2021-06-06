@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from "react-router-dom";
 
 import { Activities, Header, Routines } from "./components";
-import { getRoutines, getActivities } from "./api";
+import { getRoutines, getActivities, getUsername } from "./api";
 
 import "./app.css";
 
 const App = () => {
   const [publicRoutines, setRoutines] = useState([]);
   const [allActivities, setActivities] = useState([]);
+  const [currentUsername, setCurrentUsername] = useState(getUsername());
+
+  useEffect(() => {
+    setCurrentUsername(getUsername());
+  }, currentUsername);
 
   useEffect(() => {
     getRoutines()
@@ -30,17 +40,29 @@ const App = () => {
   return (
     <Router>
       <div id="app">
-        <Header />
+        <Header
+          currentUsername={currentUsername}
+          setCurrentUsername={setCurrentUsername}
+        />
         <main>
-          <Route exact path="/">
-            <h2>Please sign up or sign in!</h2>
-          </Route>
-          <Route path="/routines">
-            <Routines publicRoutines={publicRoutines} />
-          </Route>
-          <Route path="/activities">
-            <Activities allActivities={allActivities}/>
-          </Route>
+          <Switch>
+            <Route exact path="/">
+              <h2>Please sign up or sign in!</h2>
+            </Route>
+            <Route path="/api/routines">
+              <Routines publicRoutines={publicRoutines} />
+            </Route>
+            <Route path="/api/users/:username/routines"></Route>
+            <Route path="/api/activities">
+              <Activities allActivities={allActivities} />
+            </Route>
+            <Route path="/api/users/register">
+              <Redirect to="/" />
+            </Route>
+            <Route path="/api/users/login">
+              <Redirect to="/" />
+            </Route>
+          </Switch>
         </main>
       </div>
     </Router>

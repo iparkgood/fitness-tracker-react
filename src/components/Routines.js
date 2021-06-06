@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Routines.css";
+// import "./Routines.css";
 
 const Routines = ({ publicRoutines }) => {
   return (
