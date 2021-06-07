@@ -15,18 +15,17 @@ export async function registerUser(username, password) {
     const result = await response.json();
 
     if (result.error) {
-      const { message } = result;
-      throw message;
+      throw result.error;
     }
 
-    const { user, token, message } = result;
+    const { user, message, token } = result;
 
     setUsername(user.username);
     setToken(token);
 
-    return message;
+    return user.username;
   } catch (error) {
-    return error;
+    return { error };
   }
 }
 
@@ -45,18 +44,17 @@ export async function loginUser(username, password) {
     const result = await response.json();
 
     if (result.error) {
-      const { message } = result;
-      throw message;
+      throw result.error;
     }
 
-    const { user, token, message } = result;
+    const { user, message, token } = result;
 
     setUsername(user.username);
     setToken(token);
 
-    return message;
+    return user.username;
   } catch (error) {
-    return error;
+    return { error };
   }
 }
 

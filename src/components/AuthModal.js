@@ -2,13 +2,21 @@ import React, { useState } from "react";
 
 import Modal from "react-modal";
 
-import "./AuthModal.css";
+import "./Header.css";
+import "./ModalForm.css";
 
 import { registerUser, loginUser } from "../api";
 
 Modal.setAppElement("#root");
 
-const AuthModal = ({ modalIsOpen, setModalIsOpen, authType, setCurrentUsername, message, setMessage }) => {
+const AuthModal = ({
+  modalIsOpen,
+  setModalIsOpen,
+  authType,
+  setCurrentUsername,
+  message,
+  setMessage,
+}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,14 +28,24 @@ const AuthModal = ({ modalIsOpen, setModalIsOpen, authType, setCurrentUsername, 
 
   const handleRegister = async () => {
     const result = await registerUser(username, password);
-    setMessage(result);
-    setCurrentUsername(result.username);
+
+    if (result.error) {
+      setMessage(result.error);
+      return;
+    }
+    setCurrentUsername(result);
+    setModalIsOpen(false);
   };
 
   const handleLogin = async () => {
     const result = await loginUser(username, password);
-    setMessage(result);
-    setCurrentUsername(result.username);
+
+    if (result.error) {
+      setMessage(result.error);
+      return;
+    }
+    setCurrentUsername(result);
+    setModalIsOpen(false);
   };
 
   return (
@@ -46,17 +64,22 @@ const AuthModal = ({ modalIsOpen, setModalIsOpen, authType, setCurrentUsername, 
           alignItems: "center",
           justifyContent: "center",
           width: "480px",
+          height: "fit-content",
         },
       }}
     >
       <div id="modal-header">
         {authType === "register" ? <h3>Sign up</h3> : <h3>Log in</h3>}
-        <button onClick={() =>{ 
-          setModalIsOpen(false)
-          setMessage("");
-          }}>&times;</button>
+        <button
+          onClick={() => {
+            setModalIsOpen(false);
+            setMessage("");
+          }}
+        >
+          &times;
+        </button>
       </div>
-      <form id="auth-form" onSubmit={handleSubmit}>
+      <form id="modal-form" onSubmit={handleSubmit}>
         <label htmlFor="username">Username</label>
         <input
           type="text"

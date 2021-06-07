@@ -1,14 +1,3 @@
-#header-buttons a {
-  text-decoration: none;
-  padding: 0 10px;
-  font-size: 24px;
-  font-weight: bold;
-  color: gray;
-}
-#header-buttons a:hover {
-  color: lightcoral;
-}
-
 #modal-header {
   display: flex;
   flex-direction: row;
@@ -31,31 +20,30 @@
   color: gray;
 }
 
-#auth-form {
+#modal-form {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
   height: 100%;
 }
-#auth-form label {
+#modal-form label {
   margin-bottom: 6px;
 }
-#auth-form input {
-  margin-bottom: 12px;
-}
-#auth-form input {
+#modal-form input,
+textarea {
   background-color: lightgray;
   border-radius: 5px;
   padding: 10px;
+  margin-bottom: 12px;
 }
-#auth-form button {
+#modal-form button {
   font-size: 24px;
   background-color: lightcoral;
-  color:whitesmoke;
+  color: whitesmoke;
   padding: 10px;
   margin-top: 12px;
 }
-#auth-form button:hover {
+#modal-form button:hover {
   background-color: gray;
 }

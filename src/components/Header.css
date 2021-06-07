@@ -38,3 +38,13 @@ header {
   color: gray;
   font-weight: bold;
 }
+#header-buttons a {
+  text-decoration: none;
+  padding: 0 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: gray;
+}
+#header-buttons a:hover {
+  color: lightcoral;
+}

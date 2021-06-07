@@ -10,7 +10,7 @@ import {
 import { Activities, Header, Routines } from "./components";
 import { getRoutines, getActivities, getUsername } from "./api";
 
-import "./app.css";
+import "./index.css";
 
 const App = () => {
   const [publicRoutines, setRoutines] = useState([]);
@@ -19,7 +19,7 @@ const App = () => {
 
   useEffect(() => {
     setCurrentUsername(getUsername());
-  }, currentUsername);
+  }, [currentUsername]);
 
   useEffect(() => {
     getRoutines()
@@ -47,14 +47,16 @@ const App = () => {
         <main>
           <Switch>
             <Route exact path="/">
-              <h2>Please sign up or sign in!</h2>
+              {
+                currentUsername ? <h2>Welcome, {currentUsername}!</h2> : <h2>Please sign up or sign in!</h2>
+              }
             </Route>
             <Route path="/api/routines">
               <Routines publicRoutines={publicRoutines} />
             </Route>
             <Route path="/api/users/:username/routines"></Route>
             <Route path="/api/activities">
-              <Activities allActivities={allActivities} />
+              <Activities allActivities={allActivities} setActivities={setActivities} currentUsername={currentUsername}/>
             </Route>
             <Route path="/api/users/register">
               <Redirect to="/" />

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getToken } from "./users";
 
 const BASE = "http://fitnesstrac-kr.herokuapp.com";
 
@@ -13,16 +14,26 @@ export async function getActivities() {
 
 export async function createActivity(name, description) {
   try {
+    const token = getToken();
     const response = await fetch(`${BASE}/api/activities`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
       body: JSON.stringify({
-        name, description
+        name,
+        description,
       }),
     });
     const result = await response.json();
 
+    if (result.error) {
+      throw result.error;
+    }
+
     return result;
   } catch (error) {
-    console.error(error);
+    return {error};
   }
 }
