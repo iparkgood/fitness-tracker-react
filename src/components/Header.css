@@ -27,7 +27,7 @@ header {
   background-color: lightseagreen;
 }
 #menu a:hover {
-  box-shadow: 0 -2px 12px rgb(170, 170, 170);
+  filter: grayscale(40%)
 }
 
 #header-buttons {

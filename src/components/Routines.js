@@ -1,6 +1,6 @@
 import React from "react";
 
-// import "./Routines.css";
+import "./Routines.css";
 
 const Routines = ({ publicRoutines }) => {
   return (
@@ -8,13 +8,13 @@ const Routines = ({ publicRoutines }) => {
       {publicRoutines.map(({ id, name, goal, creatorName, activities }) => (
         <div key={id} className="routine">
           <h3>{name}</h3>
-          <p>{goal}</p>
-          <p id="creator-name">
-            by {creatorName}
+          <p>
+            created by <span id="creator-name">{creatorName}</span>
           </p>
+          <p>{goal}</p>
           {activities !== []
             ? activities.map(({ id, name, description, duration, count }) => (
-                <div key={id}>
+                <div className="routine-activity" key={id}>
                   <p>{name}</p>
                   <p>{description}</p>
                   <p>duration: {duration}</p>
