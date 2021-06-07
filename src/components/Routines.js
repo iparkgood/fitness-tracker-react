@@ -9,19 +9,19 @@ const Routines = ({ publicRoutines }) => {
         {publicRoutines.map(({ id, name, goal, creatorName, activities }) => (
           <div key={id} className="routine">
             <h3>{name}</h3>
-            <p className="creator-name">{creatorName}</p>
-            <p className="goal">{goal}</p>
-            {activities !== [] ? (
+            <p>by <span className="creator-name">{creatorName}</span></p>
+            <p>My Goal: {goal}</p>
+            {activities && (
               activities.map(({ id, name, description, duration, count }) => (
                 <div className="routine-activity" key={id}>
-                  <p>{name}</p>
-                  <p>{description}</p>
-                  <p>duration: {duration}</p>
-                  <p>count: {count}</p>
+                  <h4>{name}</h4>
+                  <ul>
+                  {description && <li>{description}</li>}
+                  {duration && <li>Duration: {duration}</li>}
+                  {count && <li>Count: {count}</li>}
+                  </ul>
                 </div>
               ))
-            ) : (
-              <p>"No Activity!"</p>
             )}
           </div>
         ))}

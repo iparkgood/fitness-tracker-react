@@ -23,27 +23,27 @@ const Header = ({ currentUsername, setCurrentUsername }) => {
         <NavLink to="/" id="home-tab">
           Home
         </NavLink>
-        <NavLink to="/api/routines" id="routines-tab">
+        <NavLink to="/routines" id="routines-tab">
           Routines
         </NavLink>
         {currentUsername && (
-          <NavLink to="/api/users/:username/routines" id="myroutines-tab">
+          <NavLink to={`/users/${currentUsername}/routines`} id="myroutines-tab">
             My Routines
           </NavLink>
         )}
-        <NavLink to="/api/activities" id="activities-tab">
+        <NavLink to="/activities" id="activities-tab">
           Activities
         </NavLink>
       </div>
       <div id="header-buttons">
         {currentUsername ? (
-          <a href="#" onClick={handleLogout}>
+          <NavLink to="/" onClick={handleLogout}>
             Log out
-          </a>
+          </NavLink>
         ) : (
           <>
             <NavLink
-              to="/api/users/register"
+              to="/users/register"
               onClick={() => {
                 setModalIsOpen(true);
                 setAuthType("register");
@@ -52,7 +52,7 @@ const Header = ({ currentUsername, setCurrentUsername }) => {
               Sign up
             </NavLink>
             <NavLink
-              to="/api/users/login"
+              to="/users/login"
               onClick={() => {
                 setModalIsOpen(true);
                 setAuthType("login");

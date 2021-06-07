@@ -11,7 +11,7 @@ header {
   text-decoration: none;
   color: whitesmoke;
   padding: 10px 20px;
-  box-shadow: 0 -1px 4px gray;
+  box-shadow: 1px -1px 4px rgb(150, 150, 150);
   border-radius: 10px 10px 0 0;
 }
 #home-tab {
@@ -27,7 +27,7 @@ header {
   background-color: lightseagreen;
 }
 #menu a:hover {
-  filter: grayscale(40%)
+  opacity: 0.7;
 }
 
 #header-buttons {

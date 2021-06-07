@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { default as ActivityModal } from "./ActivityModal";
 
 import "./Activities.css";
+import "./CreateButton.css"
 
 const Activities = ({ allActivities, currentUsername, setActivities }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -19,7 +20,7 @@ const Activities = ({ allActivities, currentUsername, setActivities }) => {
       </div>
       {currentUsername && (
         <button
-          id="activity-create-button"
+          className="create-button"
           onClick={() => setModalIsOpen(true)}
         >
           +

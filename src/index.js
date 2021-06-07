@@ -7,8 +7,8 @@ import {
   Switch,
 } from "react-router-dom";
 
-import { Activities, Header, Routines, Home } from "./components";
-import { getRoutines, getActivities, getUsername } from "./api";
+import { Activities, Header, Routines, Home, MyRoutines } from "./components";
+import { getRoutines, getActivities, getUsername, getMyRoutines } from "./api";
 
 import "./index.css";
 
@@ -16,6 +16,7 @@ const App = () => {
   const [publicRoutines, setRoutines] = useState([]);
   const [allActivities, setActivities] = useState([]);
   const [currentUsername, setCurrentUsername] = useState(getUsername());
+  const [myRoutines, setMyRoutines] = useState([]);
 
   useEffect(() => {
     setCurrentUsername(getUsername());
@@ -28,6 +29,14 @@ const App = () => {
       })
       .catch((error) => console.error(error));
   }, []);
+
+  useEffect(() => {
+    getMyRoutines()
+      .then((mr) => {
+        setMyRoutines(mr);
+      })
+      .catch((error) => console.error(error));
+  }, [currentUsername]);
 
   useEffect(() => {
     getActivities()
@@ -49,21 +58,21 @@ const App = () => {
             <Route exact path="/">
               <Home currentUsername={currentUsername} />
             </Route>
-            <Route path="/api/routines">
+            <Route path="/routines">
               <Routines publicRoutines={publicRoutines} />
             </Route>
-            <Route path="/api/users/:username/routines"></Route>
-            <Route path="/api/activities">
+            <Route path="/users/:username/routines">
+              <MyRoutines {...{ myRoutines, setMyRoutines }} />
+            </Route>
+            <Route path="/activities">
               <Activities
-                allActivities={allActivities}
-                setActivities={setActivities}
-                currentUsername={currentUsername}
+                {...{ allActivities, setActivities, currentUsername }}
               />
             </Route>
-            <Route path="/api/users/register">
+            <Route path="/users/register">
               <Redirect to="/" />
             </Route>
-            <Route path="/api/users/login">
+            <Route path="/users/login">
               <Redirect to="/" />
             </Route>
           </Switch>
