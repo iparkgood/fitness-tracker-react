@@ -7,7 +7,7 @@ import {
   Switch,
 } from "react-router-dom";
 
-import { Activities, Header, Routines } from "./components";
+import { Activities, Header, Routines, Home } from "./components";
 import { getRoutines, getActivities, getUsername } from "./api";
 
 import "./index.css";
@@ -47,16 +47,18 @@ const App = () => {
         <main>
           <Switch>
             <Route exact path="/">
-              {
-                currentUsername ? <h2>Welcome, {currentUsername}!</h2> : <h2>Please sign up or sign in!</h2>
-              }
+              <Home currentUsername={currentUsername} />
             </Route>
             <Route path="/api/routines">
               <Routines publicRoutines={publicRoutines} />
             </Route>
             <Route path="/api/users/:username/routines"></Route>
             <Route path="/api/activities">
-              <Activities allActivities={allActivities} setActivities={setActivities} currentUsername={currentUsername}/>
+              <Activities
+                allActivities={allActivities}
+                setActivities={setActivities}
+                currentUsername={currentUsername}
+              />
             </Route>
             <Route path="/api/users/register">
               <Redirect to="/" />
