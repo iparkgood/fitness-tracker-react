@@ -88,7 +88,12 @@ const RoutineModal = ({
           required
         />
         <label htmlFor="isPublic">Public</label>
-        <input type="checkbox" id="isPublic" defaultChecked={isPublic} onChange={(e) => setIsPublic(e.target.value)}></input>
+        <input
+          type="checkbox"
+          id="isPublic"
+          defaultChecked={isPublic}
+          onChange={(e) => setIsPublic(e.target.value)}
+        ></input>
         <div id="result-message">{message}</div>
         <button onClick={handleCreateRoutine}>Submit</button>
       </form>

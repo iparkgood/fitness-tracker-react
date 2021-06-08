@@ -20,7 +20,7 @@ const App = () => {
 
   useEffect(() => {
     setCurrentUsername(getUsername());
-  }, [currentUsername]);
+  }, []);
 
   useEffect(() => {
     getRoutines()
@@ -62,7 +62,7 @@ const App = () => {
               <Routines publicRoutines={publicRoutines} />
             </Route>
             <Route path="/users/:username/routines">
-              <MyRoutines {...{ myRoutines, setMyRoutines }} />
+              <MyRoutines {...{ myRoutines, setMyRoutines, currentUsername }} />
             </Route>
             <Route path="/activities">
               <Activities

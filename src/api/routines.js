@@ -20,7 +20,7 @@ export async function createRoutine(name, goal, isPublic) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         name,
@@ -37,5 +37,52 @@ export async function createRoutine(name, goal, isPublic) {
     return result;
   } catch (error) {
     return { error };
+  }
+}
+
+export async function deleteRoutine(routineId) {
+  try {
+    const token = getToken();
+    const response = await fetch(`${BASE}/api/routines/${routineId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+
+    if (result.error) {
+      throw result.error;
+    }
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function patchRoutine(routineId) {
+  try {
+    const token = getToken();
+    const response = await fetch(`${BASE}/api/routines/${routineId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        
+      })
+    });
+    const result = await response.json();
+
+    if (result.error) {
+      throw result.error;
+    }
+
+    return result;
+  } catch (error) {
+    console.error(error);
   }
 }
