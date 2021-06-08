@@ -83,26 +83,24 @@ export async function loginUser(username, password) {
 //   }
 // }
 
-// export async function getMyRoutines() {
-//   try {
-//     const username = getUsername();
-//     const response = await fetch(`${BASE}/api/users/${username}/routines`, {
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     const result = await response.json();
-
-//     return result;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
 export async function getMyRoutines() {
   try {
     const username = getUsername();
-    const { data } = await axios.get(`${BASE}/api/users/${username}/routines`);
+    const token = getToken();
+
+    if (!username) {
+      return;
+    }
+
+    const response = await fetch(`${BASE}/api/users/${username}/routines`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+    });
+
+    const data = await response.json();
+
     return data;
   } catch (error) {
     throw error;

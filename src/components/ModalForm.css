@@ -47,3 +47,7 @@ textarea {
 #modal-form button:hover {
   background-color: gray;
 }
+#select-activity {
+  padding: 10px;
+  margin-bottom: 6px;
+}

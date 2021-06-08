@@ -62,7 +62,7 @@ const App = () => {
               <Routines publicRoutines={publicRoutines} />
             </Route>
             <Route path="/users/:username/routines">
-              <MyRoutines {...{ myRoutines, setMyRoutines, currentUsername }} />
+              <MyRoutines {...{ myRoutines, setMyRoutines, publicRoutines, setRoutines, allActivities }} />
             </Route>
             <Route path="/activities">
               <Activities

@@ -13,6 +13,7 @@ const RoutineModal = ({
   setModalIsOpen,
   myRoutines,
   setMyRoutines,
+  publicRoutines, setRoutines
 }) => {
   const [routineName, setRoutineName] = useState("");
   const [goal, setGoal] = useState("");
@@ -34,8 +35,9 @@ const RoutineModal = ({
       setMessage(result.error);
       return;
     }
-
+    
     setMyRoutines([...myRoutines, result]);
+    setRoutines([...publicRoutines, result])
     setModalIsOpen(false);
   };
 
