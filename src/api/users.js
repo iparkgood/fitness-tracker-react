@@ -20,7 +20,7 @@ export async function registerUser(username, password) {
       throw result.error;
     }
 
-    const { user, message, token } = result;
+    const { user, token } = result;
 
     setUsername(user.username);
     setToken(token);
@@ -49,7 +49,7 @@ export async function loginUser(username, password) {
       throw result.error;
     }
 
-    const { user, message, token } = result;
+    const { user, token } = result;
 
     setUsername(user.username);
     setToken(token);
@@ -59,29 +59,6 @@ export async function loginUser(username, password) {
     return { error };
   }
 }
-
-// export async function fetchMe() {
-//   try {
-//     const token = getToken();
-
-//     const response = await fetch(`${BASE}/api/users/me`, {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//     const result = await response.json();
-
-//     if (result.error) {
-//       const { message } = result;
-//       throw message;
-//     }
-
-//     return result.username;
-//   } catch (error) {
-//     return error;
-//   }
-// }
 
 export async function getMyRoutines() {
   try {
@@ -95,7 +72,7 @@ export async function getMyRoutines() {
     const response = await fetch(`${BASE}/api/users/${username}/routines`, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
     });
 
