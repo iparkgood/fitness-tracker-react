@@ -32,28 +32,35 @@ const ActivityModal = ({
 
   const handleAddActivity = async () => {
     const selectedActivity = allActivities.find((a) => a.name === activity);
-   
+
     const result = await addActToRoutine(
       id,
       selectedActivity.id,
       count,
       duration
     );
-  
+
     if (result.error) {
       setMessage(result.error);
       return;
     }
 
-    //find routine using routine Id 
-    const routineToAdd = myRoutines.filter((mr) => mr.id === result.routineId)
-    //add activities to the routine 
-    console.log(routineToAdd);
-    routineToAdd[0].activities.push(result)
-
-    setMyRoutines([...myRoutines, routineToAdd])
-    setRoutines([...publicRoutines, routineToAdd])
-
+    
+    const routineToAdd = myRoutines.filter((mr) => mr.id === result.routineId);
+    const activityToAdd = allActivities.filter((a) => a.id === result.activityId);
+    
+    const obj = {
+      name:activityToAdd[0].name,
+      description:activityToAdd[0].description,
+      duration:result.duration,
+      count:result.count,
+    }
+    
+    routineToAdd[0].activities.push(obj);
+    
+    setMyRoutines([...myRoutines, routineToAdd[0]]);
+    setRoutines([...publicRoutines, routineToAdd[0]]);
+    
     setActivity(allActivities[0]);
     setDuration(0);
     setCount(0);

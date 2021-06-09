@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 import "./Routines.css";
 import "./CreateButton.css";
@@ -49,6 +55,7 @@ const MyRoutines = ({
               <Link
                 to={`/routines/${id}/activities`}
                 onClick={() => setActModalIsOpen(true)}
+                className="add-act-button"
               >
                 +<span>Activity</span>
               </Link>

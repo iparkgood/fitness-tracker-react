@@ -63,21 +63,27 @@
 }
 
 .add-act-button {
+  text-decoration: none;
+  text-indent: 4px;
+  width: 120px;
   background: none;
   color: lightcoral;
   font-weight: bold;
   font-size: 22px;
+  border: 1px solid rgb(150, 150, 150);
+  border-radius: 5px;
 
   display: flex;
   align-items: center;
 
-  margin-top: 6px;
+  margin: 6px 0;
 }
 .add-act-button span {
   color: rgb(100, 100, 100);
   margin-left: 10px;
   font-size: 18px;
 }
-.add-act-button span:hover {
-  color: gray;
+.add-act-button:hover {
+  color: white;
+  background-color: rgb(150, 150, 150);;
 }

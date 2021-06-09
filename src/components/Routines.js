@@ -17,8 +17,8 @@ const Routines = ({ publicRoutines }) => {
                   <h4>{name}</h4>
                   <ul>
                   {description && <li>{description}</li>}
-                  {duration && <li>Duration: {duration}</li>}
-                  {count && <li>Count: {count}</li>}
+                  {duration !== 0 && <li>Duration: {duration}</li>}
+                  {count !== 0 && <li>Count: {count}</li>}
                   </ul>
                 </div>
               ))
