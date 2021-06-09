@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE = "http://fitnesstrac-kr.herokuapp.com";
+const BASE = "https://fitnesstrac-kr.herokuapp.com";
 
 export async function registerUser(username, password) {
   try {

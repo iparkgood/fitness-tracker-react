@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE = "http://fitnesstrac-kr.herokuapp.com";
+const BASE = "https://fitnesstrac-kr.herokuapp.com";
 
 import { getToken, getUsername } from "./users";
 
