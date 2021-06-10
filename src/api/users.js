@@ -1,5 +1,3 @@
-import axios from "axios";
-
 const BASE = "https://fitnesstrac-kr.herokuapp.com";
 
 export async function registerUser(username, password) {
@@ -72,7 +70,7 @@ export async function getMyRoutines() {
     const response = await fetch(`${BASE}/api/users/${username}/routines`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     });
 
@@ -80,7 +78,7 @@ export async function getMyRoutines() {
 
     return data;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 

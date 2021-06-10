@@ -110,3 +110,15 @@
   color: white;
   background-color: rgb(150, 150, 150);;
 }
+
+.delete-activity-button {
+  background: none;
+  color: lightcoral;
+  font-weight: bold;
+  font-size: 24px;
+
+  float: right;
+}
+.delete-activity-button:hover {
+ color: gray; 
+}

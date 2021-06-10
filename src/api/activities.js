@@ -8,7 +8,7 @@ export async function getActivities() {
     const { data } = await axios.get(`${BASE}/api/activities`);
     return data;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -19,7 +19,7 @@ export async function createActivity(name, description) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         name,
@@ -34,6 +34,6 @@ export async function createActivity(name, description) {
 
     return result;
   } catch (error) {
-    return {error};
+    return { error };
   }
 }

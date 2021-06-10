@@ -35,7 +35,7 @@ const RoutineModal = ({
       setMessage(result.error);
       return;
     }
-    
+  
     setMyRoutines([...myRoutines, result]);
     setRoutines([...publicRoutines, result])
     setModalIsOpen(false);

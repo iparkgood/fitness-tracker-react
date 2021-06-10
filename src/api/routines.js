@@ -9,7 +9,7 @@ export async function getRoutines() {
     const { data } = await axios.get(`${BASE}/api/routines`);
     return data;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -20,7 +20,7 @@ export async function createRoutine(name, goal, isPublic) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
       body: JSON.stringify({
         name,
@@ -86,7 +86,7 @@ export async function patchRoutine(routineId, name, goal) {
 
     return result;
   } catch (error) {
-    return {error};
+    return { error };
   }
 }
 
@@ -143,12 +143,13 @@ export async function patchRoutineActivity(routineActivityId, count, duration) {
 
     return result;
   } catch (error) {
-    return {error};
+    return { error };
   }
 }
 
 export async function deleteRoutineActivity(routineActivityId) {
   try {
+
     const token = getToken();
     const response = await fetch(
       `${BASE}/api/routine_activities/${routineActivityId}`,
@@ -156,7 +157,7 @@ export async function deleteRoutineActivity(routineActivityId) {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       }
     );

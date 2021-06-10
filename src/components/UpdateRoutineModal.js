@@ -13,9 +13,7 @@ const UpdateRoutineModal = ({
   routineModalIsOpen,
   setRoutineModalIsOpen,
   publicRoutines,
-  myRoutines,
-  setRoutines,
-  setMyRoutines,
+  myRoutines
 }) => {
   const [routineName, setRoutineName] = useState("");
   const [routineGoal, setRoutineGoal] = useState("");

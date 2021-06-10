@@ -7,9 +7,9 @@ import "./CreateButton.css";
 import { default as RoutineModal } from "./RoutineModal";
 import { default as AddActModal } from "./AddActModal";
 import { default as UpdateRoutineModal } from "./UpdateRoutineModal";
-import {default as UpdateRoutineActModal} from "./UpdateRoutineActModal"
+import { default as UpdateRoutineActModal } from "./UpdateRoutineActModal";
 
-import { deleteRoutine } from "../api";
+import { deleteRoutine, deleteRoutineActivity } from "../api";
 
 const MyRoutines = ({
   myRoutines,
@@ -33,6 +33,25 @@ const MyRoutines = ({
 
     setMyRoutines(updatedRoutines);
     setRoutines(updatedPublicRoutines);
+  };
+
+  const handleDeleteActivity = async (routineActivityId) => {
+    const result = await deleteRoutineActivity(routineActivityId);
+
+    const updatedRoutine = myRoutines.find((mr) => mr.id === result.routineId);
+    const activitiesWithoutDeletedAct = updatedRoutine.activities.filter(
+      (a) => a.routineActivityId !== result.id
+    );
+
+    updatedRoutine.activities = activitiesWithoutDeletedAct;
+
+    const updatedPublicRoutines = publicRoutines.filter(
+      (pr) => pr.id !== result.routineId
+    );
+    updatedPublicRoutines.activities = activitiesWithoutDeletedAct;
+
+    // setMyRoutines([...myRoutines, updatedRoutine]);
+    // setRoutines([...publicRoutines]);
   };
 
   return (
@@ -66,8 +85,24 @@ const MyRoutines = ({
 
               {activities &&
                 activities.map(
-                  ({ id, name, description, duration, count, routineActivityId }, idx) => (
+                  (
+                    {
+                      id,
+                      name,
+                      description,
+                      duration,
+                      count,
+                      routineActivityId,
+                    },
+                    idx
+                  ) => (
                     <div className="routine-activity" key={id}>
+                      <button
+                        className="delete-activity-button"
+                        onClick={() => handleDeleteActivity(routineActivityId)}
+                      >
+                        &times;
+                      </button>
                       <h4>{name}</h4>
                       <ul>
                         {description && (
@@ -75,7 +110,11 @@ const MyRoutines = ({
                             {description}
                           </li>
                         )}
-                        <Link to={`/routine_activities/${routineActivityId}`} className="update-ra-button" onClick={() => setRoutineActModalIsOpen(true)}>
+                        <Link
+                          to={`/routine_activities/${routineActivityId}`}
+                          className="update-ra-button"
+                          onClick={() => setRoutineActModalIsOpen(true)}
+                        >
                           {duration !== 0 && (
                             <li key={`${duration}-${idx + 1}`}>
                               Duration: {duration}
@@ -114,8 +153,6 @@ const MyRoutines = ({
             setRoutineModalIsOpen,
             publicRoutines,
             myRoutines,
-            setRoutines,
-            setMyRoutines,
           }}
         />
       </Route>
@@ -126,14 +163,19 @@ const MyRoutines = ({
             setActModalIsOpen,
             allActivities,
             myRoutines,
-            setMyRoutines,
             publicRoutines,
-            setRoutines,
           }}
         />
       </Route>
       <Route path="/routine_activities/:routineActivityId">
-          <UpdateRoutineActModal {...{routineActModalIsOpen, setRoutineActModalIsOpen, myRoutines, setMyRoutines, publicRoutines, setRoutines}} />
+        <UpdateRoutineActModal
+          {...{
+            routineActModalIsOpen,
+            setRoutineActModalIsOpen,
+            myRoutines,
+            publicRoutines,
+          }}
+        />
       </Route>
     </Router>
   );

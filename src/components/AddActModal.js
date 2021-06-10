@@ -14,9 +14,7 @@ const ActivityModal = ({
   setActModalIsOpen,
   allActivities,
   myRoutines,
-  setMyRoutines,
-  publicRoutines,
-  setRoutines,
+  publicRoutines
 }) => {
   const [activity, setActivity] = useState(allActivities[0]);
   const [duration, setDuration] = useState(0);
@@ -68,8 +66,14 @@ const ActivityModal = ({
       routineToAdd[0].activities.push(obj);
     }
 
-    setMyRoutines([...myRoutines, routineToAdd[0]]);
-    setRoutines([...publicRoutines, routineToAdd[0]]);
+    const publicRoutineToAdd = publicRoutines.filter((pr) => pr.id === result.routineId);
+
+    if (!publicRoutineToAdd[0].activities) {
+      publicRoutineToAdd[0].activities = [];
+      publicRoutineToAdd[0].activities.push(obj);
+    } else {
+      publicRoutineToAdd[0].activities.push(obj);
+    }
 
     setActivity(allActivities[0]);
     setDuration(0);

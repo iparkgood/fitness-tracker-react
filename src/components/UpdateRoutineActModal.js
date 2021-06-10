@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import Modal from "react-modal";
 
 import "./ModalForm.css";
-// import "./CreateButton.css";
 
 import { patchRoutineActivity } from "../api";
 
@@ -13,9 +12,7 @@ const UpdateRoutineActModal = ({
   routineActModalIsOpen,
   setRoutineActModalIsOpen,
   myRoutines,
-  setMyRoutines,
   publicRoutines,
-  setRoutines,
 }) => {
   const [duration, setDuration] = useState(0);
   const [count, setCount] = useState(0);
@@ -41,14 +38,20 @@ const UpdateRoutineActModal = ({
     }
 
     const updatedRoutine = myRoutines.find((mr) => mr.id === result.routineId);
-    const updatedRoutineAct = updatedRoutine.activities.find((a) => a.routineActivityId === result.id);
+    const updatedRoutineAct = updatedRoutine.activities.find(
+      (a) => a.routineActivityId === result.id
+    );
 
     updatedRoutineAct.duration = result.duration;
     updatedRoutineAct.count = result.count;
 
-    const updatedPublicRoutines = publicRoutines.find((pr) => pr.id === result.routineId)
-    const updatedPublicRoutineAct = updatedPublicRoutines.activities.find((a) => a.routineActivityId === result.id);
-    
+    const updatedPublicRoutines = publicRoutines.find(
+      (pr) => pr.id === result.routineId
+    );
+    const updatedPublicRoutineAct = updatedPublicRoutines.activities.find(
+      (a) => a.routineActivityId === result.id
+    );
+
     updatedPublicRoutineAct.duration = result.duration;
     updatedPublicRoutineAct.count = result.count;
 
