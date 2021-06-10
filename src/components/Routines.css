@@ -45,6 +45,9 @@
 .routine-activity ul {
   list-style-position: inside;
 }
+.routine-activity li {
+  padding: 2px;
+}
 
 .delete-button {
   background: none;
@@ -69,6 +72,15 @@
   width: 300px;
 }
 .update-routine-button:hover {
+  background-color: lightgray;
+  border-radius: 10px;
+}
+.update-ra-button {
+  text-decoration: none;
+  color: black;
+}
+.update-ra-button:hover:hover{
+  display: inline-block;
   background-color: lightgray;
   border-radius: 10px;
 }

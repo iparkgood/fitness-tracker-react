@@ -75,7 +75,7 @@ const MyRoutines = ({
                             {description}
                           </li>
                         )}
-                        <Link to={`/routine_activities/${routineActivityId}`} onClick={() => setRoutineActModalIsOpen(true)}>
+                        <Link to={`/routine_activities/${routineActivityId}`} className="update-ra-button" onClick={() => setRoutineActModalIsOpen(true)}>
                           {duration !== 0 && (
                             <li key={`${duration}-${idx + 1}`}>
                               Duration: {duration}
