@@ -23,7 +23,7 @@ const ActivityModal = ({
   const [count, setCount] = useState(0);
   const [message, setMessage] = useState(null);
 
-  const { id } = useParams();
+  const { routineId } = useParams();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -34,7 +34,7 @@ const ActivityModal = ({
     const selectedActivity = allActivities.find((a) => a.name === activity);
 
     const result = await addActToRoutine(
-      id,
+      routineId,
       selectedActivity.id,
       count,
       duration
@@ -45,22 +45,32 @@ const ActivityModal = ({
       return;
     }
 
-    
     const routineToAdd = myRoutines.filter((mr) => mr.id === result.routineId);
-    const activityToAdd = allActivities.filter((a) => a.id === result.activityId);
-    
+    const activityToAdd = allActivities.filter(
+      (a) => a.id === result.activityId
+    );
+
     const obj = {
-      name:activityToAdd[0].name,
-      description:activityToAdd[0].description,
-      duration:result.duration,
-      count:result.count,
+      id: result.id,
+      routineId: result.routineId,
+      activityId: result.activityId,
+      name: activityToAdd[0].name,
+      description: activityToAdd[0].description,
+      duration: result.duration,
+      count: result.count,
+      routineActivityId: result.id,
+    };
+
+    if (!routineToAdd[0].activities) {
+      routineToAdd[0].activities = [];
+      routineToAdd[0].activities.push(obj);
+    } else {
+      routineToAdd[0].activities.push(obj);
     }
-    
-    routineToAdd[0].activities.push(obj);
-    
+
     setMyRoutines([...myRoutines, routineToAdd[0]]);
     setRoutines([...publicRoutines, routineToAdd[0]]);
-    
+
     setActivity(allActivities[0]);
     setDuration(0);
     setCount(0);

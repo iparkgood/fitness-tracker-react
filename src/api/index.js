@@ -1,4 +1,4 @@
-export { getRoutines, createRoutine, deleteRoutine, patchRoutine, addActToRoutine } from "./routines";
+export { getRoutines, createRoutine, deleteRoutine, addActToRoutine, patchRoutine, patchRoutineActivity, deleteRoutineActivity } from "./routines";
 export { getActivities, createActivity } from "./activities";
 export {
   registerUser,
